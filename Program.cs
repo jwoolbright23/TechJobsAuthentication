@@ -1,11 +1,23 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using TechJobsAuthentication.Data;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+builder.Services.AddDefaultIdentity<IdentityUser>
+(options =>
+{
+   options.SignIn.RequireConfirmedAccount = true;
+   options.Password.RequireDigit = false;
+   options.Password.RequiredLength = 10;
+   options.Password.RequireNonAlphanumeric = false;
+   options.Password.RequireUppercase = true;
+   options.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<JobDbContext>();
 
 //--- MySql connection
 
@@ -34,8 +46,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
