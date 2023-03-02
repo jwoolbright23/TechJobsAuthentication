@@ -25,7 +25,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>
 // working with the .NET 6 (specifically the lack of a Startup.cs)
 //https://learn.microsoft.com/en-us/aspnet/core/migration/50-to-60-samples?view=aspnetcore-6.0#add-configuration-providers
 
-var connectionString = "server=localhost;user=techjobs_auth;password=ILoveTechJobs;database=techjobs_auth";
+var connectionString = "server=localhost;user=john;password=admin;database=techjobs_auth";
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 
 builder.Services.AddDbContext<JobDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
